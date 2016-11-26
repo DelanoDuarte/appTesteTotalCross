@@ -1,7 +1,7 @@
 /**
  * 
  */
-package modelo;
+package model;
 
 /**
  * @author delan

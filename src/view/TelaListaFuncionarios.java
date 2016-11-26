@@ -6,7 +6,7 @@ package view;
 import java.sql.SQLException;
 import java.util.List;
 
-import modelo.Funcionario;
+import model.Funcionario;
 import repository.FuncionarioRepository;
 import totalcross.sys.Settings;
 import totalcross.ui.Button;

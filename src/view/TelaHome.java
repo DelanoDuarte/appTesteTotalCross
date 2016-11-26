@@ -6,7 +6,6 @@ package view;
 import totalcross.io.IOException;
 import totalcross.sys.Settings;
 import totalcross.ui.Button;
-import totalcross.ui.ImageControl;
 import totalcross.ui.Label;
 import totalcross.ui.MainWindow;
 import totalcross.ui.Spacer;

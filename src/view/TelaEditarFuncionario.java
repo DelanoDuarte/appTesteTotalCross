@@ -3,7 +3,7 @@
  */
 package view;
 
-import modelo.Funcionario;
+import model.Funcionario;
 import repository.FuncionarioRepository;
 import totalcross.sys.Settings;
 import totalcross.ui.Button;

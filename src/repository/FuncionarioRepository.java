@@ -35,12 +35,15 @@ public class FuncionarioRepository {
 	public void inserirFuncionario(Funcionario funcionario) throws SQLException {
 		try {
 
-			String insert = "INSERT INTO tb_funcionario" + "(nome, sobrenome) VALUES" + "(?,?)";
+			String insert = "INSERT INTO tb_funcionario" + "(nome, sobrenome,salario,cargo) VALUES" + "(?,?,?,?)";
 
 			PreparedStatement preparedStatement = new ConnectionFactory().getConnection().prepareStatement(insert);
 
 			preparedStatement.setString(1, funcionario.getNome());
 			preparedStatement.setString(2, funcionario.getSobrenome());
+			preparedStatement.setDouble(3, funcionario.getSalario());
+			preparedStatement.setString(4, funcionario.getCargo());
+
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 			Toast.show("Novo Funcionario Inserido com Sucesso !", 2000);
@@ -58,12 +61,14 @@ public class FuncionarioRepository {
 	public void atualizaFuncionario(Funcionario funcionario) throws SQLException {
 		try {
 
-			String update = "UPDATE tb_funcionario SET nome = ?,sobrenome = ? " + " WHERE id = ?";
+			String update = "UPDATE tb_funcionario SET nome = ?,sobrenome = ?,salario = ?,cargo = ? " + " WHERE id = ?";
 			PreparedStatement preparedStatement = new ConnectionFactory().getConnection().prepareStatement(update);
 
 			preparedStatement.setString(1, funcionario.getNome());
 			preparedStatement.setString(2, funcionario.getSobrenome());
-			preparedStatement.setInt(3, funcionario.getId());
+			preparedStatement.setDouble(3, funcionario.getSalario());
+			preparedStatement.setString(4, funcionario.getCargo());
+			preparedStatement.setInt(5, funcionario.getId());
 
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
@@ -108,7 +113,8 @@ public class FuncionarioRepository {
 			ResultSet resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
 				funcionario = new Funcionario((Integer) resultSet.getObject("id"), (String) resultSet.getObject("nome"),
-						(String) resultSet.getObject("sobrenome"));
+						(String) resultSet.getObject("sobrenome"), (Double) resultSet.getObject("salario"),
+						(String) resultSet.getObject("cargo"));
 
 				funcionarios.add(funcionario);
 			}
@@ -138,7 +144,8 @@ public class FuncionarioRepository {
 			ResultSet resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
 				funcionario = new Funcionario((Integer) resultSet.getObject("id"), (String) resultSet.getObject("nome"),
-						(String) resultSet.getObject("sobrenome"));
+						(String) resultSet.getObject("sobrenome"), (Double) resultSet.getObject("salario"),
+						(String) resultSet.getObject("cargo"));
 
 			}
 

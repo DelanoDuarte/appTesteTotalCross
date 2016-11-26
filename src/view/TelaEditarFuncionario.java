@@ -23,7 +23,7 @@ import totalcross.ui.gfx.Color;
  */
 public class TelaEditarFuncionario extends Window {
 
-	private Edit nome, sobrenome;
+	private Edit nome, sobrenome, salario, cargo;
 	private Button btnSalvar, btnCancelar, btnLimpar;
 	String id;
 	private FuncionarioRepository repository;
@@ -41,19 +41,30 @@ public class TelaEditarFuncionario extends Window {
 
 		add(new Label("Editando um Funcionario"), CENTER, TOP + 50);
 
-		add(new Label("Nome: "), LEFT + 100, AFTER);
+		add(new Label("Nome:* "), LEFT + 100, AFTER);
 		add(nome = new Edit(), LEFT, SAME);
 		nome.setRect(LEFT + 100, AFTER, FILL - 100, 25);
 
-		add(new Label("Sobrenome: "), LEFT + 100, AFTER);
+		add(new Label("Sobrenome:* "), LEFT + 100, AFTER);
 		add(sobrenome = new Edit(), LEFT, SAME);
 		sobrenome.setRect(LEFT + 100, AFTER - 10, FILL - 100, 25);
+
+		add(new Label("Salario: "), LEFT + 100, AFTER);
+		add(salario = new Edit(), LEFT, SAME);
+		salario.setRect(LEFT + 100, AFTER - 10, FILL - 100, 25);
+
+		add(new Label("Cargo:* "), LEFT + 100, AFTER);
+		add(cargo = new Edit(), LEFT, SAME);
+		cargo.setRect(LEFT + 100, AFTER - 10, FILL - 100, 25);
 
 		repository = new FuncionarioRepository();
 		funcionario = repository.buscarFuncionarioPorId(id);
 
 		nome.setText(funcionario.getNome());
 		sobrenome.setText(funcionario.getSobrenome());
+		String salarioTemp = String.valueOf(funcionario.getSalario());
+		salario.setText(salarioTemp);
+		cargo.setText(funcionario.getCargo());
 
 		Spacer sp = new Spacer(0, 0);
 
@@ -79,12 +90,17 @@ public class TelaEditarFuncionario extends Window {
 				if (event.target == btnSalvar) {
 
 					Integer idFuncionario = new Integer(id);
+					Double salarioTemp = new Double(salario.getText());
+
 					funcionario = new Funcionario();
 					funcionario.setId(idFuncionario);
 					funcionario.setNome(nome.getText());
 					funcionario.setSobrenome(sobrenome.getText());
+					funcionario.setSalario(salarioTemp);
+					funcionario.setCargo(cargo.getText());
 
-					if (funcionario.getNome().length() == 0 || funcionario.getSobrenome().length() == 0) {
+					if (funcionario.getNome().length() == 0 || funcionario.getSobrenome().length() == 0
+							|| funcionario.getCargo().length() == 0) {
 						Toast.show("Por Favor, Preencher os campos Obrigatórios", 2000);
 
 					} else {

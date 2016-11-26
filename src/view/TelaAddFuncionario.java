@@ -30,7 +30,7 @@ import totalcross.ui.image.ImageException;
  */
 public class TelaAddFuncionario extends Window {
 
-	private Edit nome, sobrenome;
+	private Edit nome, sobrenome, salario, cargo;
 	private Button btnSalvar, btnCancelar, btnLimpar;
 	private Connection connection;
 
@@ -47,6 +47,14 @@ public class TelaAddFuncionario extends Window {
 		add(new Label("Sobrenome: *"), LEFT + 100, AFTER);
 		add(sobrenome = new Edit(), LEFT, SAME);
 		sobrenome.setRect(LEFT + 100, AFTER - 10, FILL - 100, 25);
+
+		add(new Label("Salario(R$): "), LEFT + 100, AFTER);
+		add(salario = new Edit(), LEFT, SAME);
+		salario.setRect(LEFT + 100, AFTER - 10, FILL - 100, 25);
+
+		add(new Label("Cargo: *"), LEFT + 100, AFTER);
+		add(cargo = new Edit(), LEFT, SAME);
+		cargo.setRect(LEFT + 100, AFTER - 10, FILL - 100, 25);
 
 		Spacer sp = new Spacer(0, 0);
 
@@ -70,7 +78,7 @@ public class TelaAddFuncionario extends Window {
 					.getConnection("jdbc:sqlite:" + Convert.appendPath(Settings.appPath, "projeto.db"));
 			Statement statement = connection.createStatement();
 			statement.execute(
-					"create table if not exists tb_funcionario (id INTEGER PRIMARY KEY AUTOINCREMENT,nome varchar,sobrenome varchar) ");
+					"create table if not exists tb_funcionario (id INTEGER PRIMARY KEY AUTOINCREMENT,nome varchar,sobrenome varchar,salario double,cargo varchar)");
 			statement.close();
 
 		} catch (Exception e) {
@@ -87,10 +95,16 @@ public class TelaAddFuncionario extends Window {
 					clear();
 				} else if (event.target == btnSalvar) {
 
+					Double salarioTemp = new Double(salario.getText());
+
 					Funcionario funcionario = new Funcionario();
 					funcionario.setNome(nome.getText());
 					funcionario.setSobrenome(sobrenome.getText());
-					if (funcionario.getNome().length() == 0 || funcionario.getSobrenome().length() == 0) {
+					funcionario.setSalario(salarioTemp);
+					funcionario.setCargo(cargo.getText());
+
+					if (funcionario.getNome().length() == 0 || funcionario.getSobrenome().length() == 0
+							|| funcionario.getCargo().length() == 0) {
 						Toast.show("Por Favor, Preencher os campos Obrigatórios", 2000);
 					} else {
 						FuncionarioRepository funcionarioRepository = new FuncionarioRepository();

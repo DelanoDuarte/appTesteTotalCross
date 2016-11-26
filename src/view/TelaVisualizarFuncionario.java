@@ -25,7 +25,7 @@ import totalcross.ui.image.ImageException;
  */
 public class TelaVisualizarFuncionario extends Window {
 
-	private Edit nomeCompleto;
+	private Edit nomeCompleto, salario, cargo;
 	private Button btnCancelar;
 	String id;
 	private FuncionarioRepository repository;
@@ -47,11 +47,26 @@ public class TelaVisualizarFuncionario extends Window {
 		add(nomeCompleto = new Edit(), LEFT, SAME);
 		nomeCompleto.setRect(LEFT + 100, AFTER, FILL - 100, 25);
 
+		add(new Label("Salario: "), LEFT + 100, AFTER);
+		add(salario = new Edit(), LEFT, SAME);
+		salario.setRect(LEFT + 100, AFTER, FILL - 100, 25);
+
+		add(new Label("Cargo: "), LEFT + 100, AFTER);
+		add(cargo = new Edit(), LEFT, SAME);
+		cargo.setRect(LEFT + 100, AFTER, FILL - 100, 25);
+
 		repository = new FuncionarioRepository();
 		funcionario = repository.buscarFuncionarioPorId(id);
 
 		nomeCompleto.setText(funcionario.getNome() + " " + funcionario.getSobrenome());
 		nomeCompleto.setEditable(false);
+
+		String salarioTemp = String.valueOf(funcionario.getSalario());
+		salario.setText("R$" + " " + salarioTemp);
+		salario.setEditable(false);
+
+		cargo.setText(funcionario.getCargo());
+		cargo.setEditable(false);
 
 		Spacer sp = new Spacer(0, 0);
 

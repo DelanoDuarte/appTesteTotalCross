@@ -105,7 +105,10 @@ public class TelaListaFuncionarios extends Window {
 		try {
 			switch (event.type) {
 			case ControlEvent.PRESSED:
-				if (event.target == btnExcluir) {
+				if (event.target == grid) {
+					@SuppressWarnings(value = "unused")
+					Object element = grid.getSelectedItem();
+				} else if (event.target == btnExcluir) {
 					if (grid.getSelectedItem() == null) {
 						Toast.show("Selecione algum Funcionário para Excluir", 2000);
 					} else {

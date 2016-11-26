@@ -3,8 +3,10 @@
  */
 package view;
 
+import totalcross.io.IOException;
 import totalcross.sys.Settings;
 import totalcross.ui.Button;
+import totalcross.ui.ImageControl;
 import totalcross.ui.Label;
 import totalcross.ui.MainWindow;
 import totalcross.ui.Spacer;
@@ -12,6 +14,8 @@ import totalcross.ui.dialog.MessageBox;
 import totalcross.ui.event.ControlEvent;
 import totalcross.ui.event.Event;
 import totalcross.ui.gfx.Color;
+import totalcross.ui.image.Image;
+import totalcross.ui.image.ImageException;
 
 /**
  * @author delan
@@ -20,32 +24,39 @@ import totalcross.ui.gfx.Color;
 public class TelaHome extends MainWindow {
 
 	private Button btnListar, btnNovo;
+	private Label txtLista, txtNovo;
 
 	@Override
 	public void initUI() {
 		super.initUI();
 	}
 
-	public TelaHome() {
+	public TelaHome() throws ImageException, IOException {
 
 		gradientTitleStartColor = 0;
 		gradientTitleEndColor = 0xAAAAFF;
 
 		Settings.uiAdjustmentsBasedOnFontHeight = true;
 
-		setBackColor(0xDDDDFF);
+		setBackColor(Color.WHITE);
 
 		Spacer sp = new Spacer(0, 0);
 		add(new Label("TELA INICIAL "), CENTER, AFTER + 50);
 		add(sp, CENTER, TOP + 400, PARENTSIZE + 10, PREFERRED);
 
-		add(btnListar = new Button("Listar Funcionarios "), BEFORE, 150, PARENTSIZE + 40, 30, sp);
-		btnListar.setBackColor(Color.BRIGHT);
+		add(btnListar = new Button(""), BEFORE, 150, PARENTSIZE + 38, 115, sp);
+		btnListar.setImage(new Image("imagens/list.png"));
+		btnListar.setBackColor(Color.WHITE);
 		btnListar.setForeColor(Color.BLACK);
 
-		add(btnNovo = new Button("Novo Funcionario "), AFTER, 150, PARENTSIZE + 40, 30, sp);
-		btnNovo.setBackColor(Color.BRIGHT);
+		add(txtLista = new Label("Lista Funcionarios"), BEFORE, 260, PARENTSIZE + 41, 30, sp);
+
+		add(btnNovo = new Button(""), AFTER, 150, PARENTSIZE + 38, 115, sp);
+		btnNovo.setImage(new Image("imagens/add.png"));
+		btnNovo.setBackColor(Color.WHITE);
 		btnNovo.setForeColor(Color.BLACK);
+
+		add(txtNovo = new Label("Novo Funcionário"), AFTER, 260, PARENTSIZE + 41, 30, sp);
 	}
 
 	@Override

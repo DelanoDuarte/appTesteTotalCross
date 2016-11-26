@@ -84,6 +84,9 @@ public class TelaAddFuncionario extends Window {
 					FuncionarioRepository funcionarioRepository = new FuncionarioRepository();
 					funcionarioRepository.inserirFuncionario(funcionario);
 					clear();
+
+					TelaListaFuncionarios telaListaFuncionarios = new TelaListaFuncionarios();
+					telaListaFuncionarios.popup();
 				} else if (event.target == btnCancelar) {
 					TelaHome telaHome = new TelaHome();
 					telaHome.popup();

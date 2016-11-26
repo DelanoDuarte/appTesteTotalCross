@@ -78,9 +78,9 @@ public class TelaEditarFuncionario extends Window {
 			case ControlEvent.PRESSED:
 				if (event.target == btnSalvar) {
 
-					Integer integer = new Integer(id);
+					Integer idFuncionario = new Integer(id);
 					funcionario = new Funcionario();
-					funcionario.setId(integer);
+					funcionario.setId(idFuncionario);
 					funcionario.setNome(nome.getText());
 					funcionario.setSobrenome(sobrenome.getText());
 
@@ -94,8 +94,8 @@ public class TelaEditarFuncionario extends Window {
 				} else if (event.target == btnLimpar) {
 					clear();
 				} else if (event.target == btnCancelar) {
-					TelaHome telaHome = new TelaHome();
-					telaHome.popup();
+					TelaListaFuncionarios telaListaFuncionarios = new TelaListaFuncionarios();
+					telaListaFuncionarios.popup();
 				}
 				break;
 

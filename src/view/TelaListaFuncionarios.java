@@ -29,9 +29,9 @@ import totalcross.ui.gfx.Rect;
 public class TelaListaFuncionarios extends Window {
 
 	ListBox listBox;
-	Grid grid;
 	FuncionarioRepository repository;
 	Button btnEditar, btnExcluir, btnSair, btnNovo;
+	Grid grid;
 
 	public TelaListaFuncionarios() {
 		gradientTitleStartColor = 0;

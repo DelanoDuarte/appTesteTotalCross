@@ -16,7 +16,10 @@ import totalcross.ui.dialog.MessageBox;
 
 /**
  * @author delan
- *
+ * 
+ *         Classe Repositório, com o objetivo de realizar operações no banco de
+ *         dados. O nome e a definição da classe, é uma padrão, encontrado no
+ *         DDD(Domain Driven Design)
  */
 public class FuncionarioRepository {
 
@@ -24,6 +27,10 @@ public class FuncionarioRepository {
 
 	}
 
+	/*
+	 * Método para Inserir um novo funcionário no banco de dados, utilizando PrepareStatement.
+	 * 
+	 */
 	public void inserirFuncionario(Funcionario funcionario) throws SQLException {
 		try {
 
@@ -47,6 +54,11 @@ public class FuncionarioRepository {
 
 	}
 
+	/*
+	 * Método para Atualizar o registro de um funcionário no banco de dados, utilizando tambem o
+	 * PrepareStatement.
+	 * 
+	 */
 	public void atualizaFuncionario(Funcionario funcionario) throws SQLException {
 		try {
 
@@ -54,9 +66,8 @@ public class FuncionarioRepository {
 				Toast.show("Por Favor, Preencher os campos Obrigatórios", 2000);
 			} else {
 
-				String updateTableSQL = "UPDATE tb_funcionario SET nome = ?,sobrenome = ? " + " WHERE id = ?";
-				PreparedStatement preparedStatement = new ConnectionFactory().getConnection()
-						.prepareStatement(updateTableSQL);
+				String update = "UPDATE tb_funcionario SET nome = ?,sobrenome = ? " + " WHERE id = ?";
+				PreparedStatement preparedStatement = new ConnectionFactory().getConnection().prepareStatement(update);
 
 				preparedStatement.setString(1, funcionario.getNome());
 				preparedStatement.setString(2, funcionario.getSobrenome());
@@ -71,6 +82,11 @@ public class FuncionarioRepository {
 
 	}
 
+	/*
+	 * Método para excluir um funcionário do banco de dados, utilizando apenas o
+	 * Statement.
+	 * 
+	 */
 	public void deletarFuncionario(String id) throws SQLException {
 		try {
 			String delete = "delete from tb_funcionario where id = " + id;
@@ -84,6 +100,10 @@ public class FuncionarioRepository {
 
 	}
 
+	/*
+	 * Método para listar todos os funcionários, utilizando tambem o Statement.
+	 * 
+	 */
 	public List<Funcionario> buscarTodos() {
 
 		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
@@ -110,6 +130,11 @@ public class FuncionarioRepository {
 		return funcionarios;
 	}
 
+	/*
+	 * Método busca um funcionário especifico pelo id, utilizando tambem apenas
+	 * o Statement.
+	 * 
+	 */
 	public Funcionario buscarFuncionarioPorId(String id) {
 
 		Funcionario funcionario = null;

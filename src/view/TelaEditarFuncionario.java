@@ -84,13 +84,19 @@ public class TelaEditarFuncionario extends Window {
 					funcionario.setNome(nome.getText());
 					funcionario.setSobrenome(sobrenome.getText());
 
-					repository = new FuncionarioRepository();
-					repository.atualizaFuncionario(funcionario);
+					if (funcionario.getNome().length() == 0 || funcionario.getSobrenome().length() == 0) {
+						Toast.show("Por Favor, Preencher os campos Obrigatórios", 2000);
 
-					Toast.show("Funcionário Atualizado com Sucesso !", 2000);
+					} else {
 
-					TelaListaFuncionarios telaListaFuncionarios = new TelaListaFuncionarios();
-					telaListaFuncionarios.popup();
+						repository = new FuncionarioRepository();
+						repository.atualizaFuncionario(funcionario);
+
+						Toast.show("Funcionário Atualizado com Sucesso !", 2000);
+
+						TelaListaFuncionarios telaListaFuncionarios = new TelaListaFuncionarios();
+						telaListaFuncionarios.popup();
+					}
 				} else if (event.target == btnLimpar) {
 					clear();
 				} else if (event.target == btnCancelar) {

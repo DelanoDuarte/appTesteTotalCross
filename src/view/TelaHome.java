@@ -23,7 +23,6 @@ import totalcross.ui.image.ImageException;
 public class TelaHome extends MainWindow {
 
 	private Button btnListar, btnNovo;
-	private Label txtLista, txtNovo;
 
 	@Override
 	public void initUI() {
@@ -32,15 +31,12 @@ public class TelaHome extends MainWindow {
 
 	public TelaHome() throws ImageException, IOException {
 
-		gradientTitleStartColor = 0;
-		gradientTitleEndColor = 0xAAAAFF;
-
 		Settings.uiAdjustmentsBasedOnFontHeight = true;
 
-		setBackColor(Color.WHITE);
+		setBackColor(0xD3D3D3);
 
 		Spacer sp = new Spacer(0, 0);
-		add(new Label("TELA INICIAL "), CENTER, AFTER + 50);
+		add(new Label("BEM VINDO ! "), CENTER, AFTER + 50);
 		add(sp, CENTER, TOP + 400, PARENTSIZE + 10, PREFERRED);
 
 		add(btnListar = new Button(""), BEFORE, 150, PARENTSIZE + 38, 115, sp);
@@ -48,14 +44,14 @@ public class TelaHome extends MainWindow {
 		btnListar.setBackColor(Color.WHITE);
 		btnListar.setForeColor(Color.BLACK);
 
-		add(txtLista = new Label("Lista Funcionarios"), BEFORE, 260, PARENTSIZE + 41, 30, sp);
+		add(new Label("Lista Funcionarios"), BEFORE, 260, PARENTSIZE + 41, 30, sp);
 
 		add(btnNovo = new Button(""), AFTER, 150, PARENTSIZE + 38, 115, sp);
 		btnNovo.setImage(new Image("imagens/add.png"));
 		btnNovo.setBackColor(Color.WHITE);
 		btnNovo.setForeColor(Color.BLACK);
 
-		add(txtNovo = new Label("Novo Funcionário"), AFTER, 260, PARENTSIZE + 41, 30, sp);
+		add(new Label("Novo Funcionário"), AFTER, 260, PARENTSIZE + 41, 30, sp);
 	}
 
 	@Override

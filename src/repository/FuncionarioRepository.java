@@ -28,26 +28,22 @@ public class FuncionarioRepository {
 	}
 
 	/*
-	 * Método para Inserir um novo funcionário no banco de dados, utilizando PrepareStatement.
+	 * Método para Inserir um novo funcionário no banco de dados, utilizando
+	 * PrepareStatement.
 	 * 
 	 */
 	public void inserirFuncionario(Funcionario funcionario) throws SQLException {
 		try {
 
-			if (funcionario.getNome().length() == 0 || funcionario.getSobrenome().length() == 0) {
-				Toast.show("Por Favor, Preencher os campos Obrigatórios", 2000);
-			} else {
+			String insert = "INSERT INTO tb_funcionario" + "(nome, sobrenome) VALUES" + "(?,?)";
 
-				String insert = "INSERT INTO tb_funcionario" + "(nome, sobrenome) VALUES" + "(?,?)";
+			PreparedStatement preparedStatement = new ConnectionFactory().getConnection().prepareStatement(insert);
 
-				PreparedStatement preparedStatement = new ConnectionFactory().getConnection().prepareStatement(insert);
-
-				preparedStatement.setString(1, funcionario.getNome());
-				preparedStatement.setString(2, funcionario.getSobrenome());
-				preparedStatement.executeUpdate();
-				preparedStatement.close();
-				Toast.show("Novo Funcionario Inserido com Sucesso !", 2000);
-			}
+			preparedStatement.setString(1, funcionario.getNome());
+			preparedStatement.setString(2, funcionario.getSobrenome());
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+			Toast.show("Novo Funcionario Inserido com Sucesso !", 2000);
 		} catch (Exception e) {
 			MessageBox.showException(e, true);
 		}
@@ -55,27 +51,22 @@ public class FuncionarioRepository {
 	}
 
 	/*
-	 * Método para Atualizar o registro de um funcionário no banco de dados, utilizando tambem o
-	 * PrepareStatement.
+	 * Método para Atualizar o registro de um funcionário no banco de dados,
+	 * utilizando tambem o PrepareStatement.
 	 * 
 	 */
 	public void atualizaFuncionario(Funcionario funcionario) throws SQLException {
 		try {
 
-			if (funcionario.getNome().length() == 0 || funcionario.getSobrenome().length() == 0) {
-				Toast.show("Por Favor, Preencher os campos Obrigatórios", 2000);
-			} else {
+			String update = "UPDATE tb_funcionario SET nome = ?,sobrenome = ? " + " WHERE id = ?";
+			PreparedStatement preparedStatement = new ConnectionFactory().getConnection().prepareStatement(update);
 
-				String update = "UPDATE tb_funcionario SET nome = ?,sobrenome = ? " + " WHERE id = ?";
-				PreparedStatement preparedStatement = new ConnectionFactory().getConnection().prepareStatement(update);
+			preparedStatement.setString(1, funcionario.getNome());
+			preparedStatement.setString(2, funcionario.getSobrenome());
+			preparedStatement.setInt(3, funcionario.getId());
 
-				preparedStatement.setString(1, funcionario.getNome());
-				preparedStatement.setString(2, funcionario.getSobrenome());
-				preparedStatement.setInt(3, funcionario.getId());
-
-				preparedStatement.executeUpdate();
-				preparedStatement.close();
-			}
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
 		} catch (Exception e) {
 			MessageBox.showException(e, true);
 		}

@@ -31,14 +31,15 @@ public class FuncionarioRepository {
 				Toast.show("Por Favor, Preencher os campos Obrigatórios", 2000);
 			} else {
 
-				String insert = "insert into tb_funcionario (nome, sobrenome) values('" + funcionario.getNome() + "','"
-						+ funcionario.getSobrenome() + "')";
+				String insert = "INSERT INTO tb_funcionario" + "(nome, sobrenome) VALUES" + "(?,?)";
 
-				Statement statement = new ConnectionFactory().getConnection().createStatement();
-				statement.executeUpdate(insert);
+				PreparedStatement preparedStatement = new ConnectionFactory().getConnection().prepareStatement(insert);
 
+				preparedStatement.setString(1, funcionario.getNome());
+				preparedStatement.setString(2, funcionario.getSobrenome());
+				preparedStatement.executeUpdate();
+				preparedStatement.close();
 				Toast.show("Novo Funcionario Inserido com Sucesso !", 2000);
-				statement.close();
 			}
 		} catch (Exception e) {
 			MessageBox.showException(e, true);
@@ -48,32 +49,22 @@ public class FuncionarioRepository {
 
 	public void atualizaFuncionario(Funcionario funcionario) throws SQLException {
 		try {
-			System.out.println(funcionario.getId());
-			System.out.println(funcionario.getNome());
-			System.out.println(funcionario.getSobrenome());
 
-			// String update = "update tb_funcionario set nome = '" +
-			// funcionario.getNome() + "', sobrenome = '"
-			// + funcionario.getSobrenome() + "' where codigo = " +
-			// Integer.toString(funcionario.getId());
+			if (funcionario.getNome().length() == 0 || funcionario.getSobrenome().length() == 0) {
+				Toast.show("Por Favor, Preencher os campos Obrigatórios", 2000);
+			} else {
 
-			String updateTableSQL = "UPDATE tb_funcionario SET nome = ?,sobrenome = ? " + " WHERE id = ?";
-			PreparedStatement preparedStatement = new ConnectionFactory().getConnection()
-					.prepareStatement(updateTableSQL);
+				String updateTableSQL = "UPDATE tb_funcionario SET nome = ?,sobrenome = ? " + " WHERE id = ?";
+				PreparedStatement preparedStatement = new ConnectionFactory().getConnection()
+						.prepareStatement(updateTableSQL);
 
-			preparedStatement.setString(1, funcionario.getNome());
-			preparedStatement.setString(2, funcionario.getSobrenome());
-			preparedStatement.setInt(3, funcionario.getId());
-			
-			
-			preparedStatement.executeUpdate();
-			preparedStatement.close();
+				preparedStatement.setString(1, funcionario.getNome());
+				preparedStatement.setString(2, funcionario.getSobrenome());
+				preparedStatement.setInt(3, funcionario.getId());
 
-			// Statement statement = new
-			// ConnectionFactory().getConnection().createStatement();
-			// statement.executeUpdate(update);
-			// statement.close();
-
+				preparedStatement.executeUpdate();
+				preparedStatement.close();
+			}
 		} catch (Exception e) {
 			MessageBox.showException(e, true);
 		}

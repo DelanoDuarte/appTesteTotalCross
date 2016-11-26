@@ -5,6 +5,11 @@ import totalcross.sql.DriverManager;
 import totalcross.sys.Convert;
 import totalcross.sys.Settings;
 
+/**
+ * @author delan Classe com o objetivo de Criar apenas uma Conexão com o banco
+ *         de dados
+ */
+
 public class ConnectionFactory {
 
 	public ConnectionFactory() {

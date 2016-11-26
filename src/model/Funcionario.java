@@ -4,8 +4,8 @@
 package model;
 
 /**
- * @author delan
- *
+ * @author delan Classe Domain ou Entidade do Projeto, seguindo o padrão
+ *         DDD(Domain Driven Design).
  */
 public class Funcionario {
 
@@ -36,6 +36,10 @@ public class Funcionario {
 		this.cargo = cargo;
 	}
 
+	/*
+	 * getters e setters
+	 * 
+	 */
 	public Integer getId() {
 		return id;
 	}

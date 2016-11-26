@@ -73,6 +73,11 @@ public class TelaAddFuncionario extends Window {
 		btnCancelar.setBackColor(Color.RED);
 		btnCancelar.setForeColor(Color.WHITE);
 
+		/*
+		 * Método para criar o banco de dados caso não exista
+		 * 
+		 */
+
 		try {
 			connection = DriverManager
 					.getConnection("jdbc:sqlite:" + Convert.appendPath(Settings.appPath, "projeto.db"));

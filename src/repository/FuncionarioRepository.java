@@ -35,18 +35,23 @@ public class FuncionarioRepository {
 	public void inserirFuncionario(Funcionario funcionario) throws SQLException {
 		try {
 
-			String insert = "INSERT INTO tb_funcionario" + "(nome, sobrenome,salario,cargo) VALUES" + "(?,?,?,?)";
+			if (funcionario.getNome().length() == 0 || funcionario.getSobrenome().length() == 0
+					|| funcionario.getCargo().length() == 0) {
+				Toast.show("Por Favor, Preencher os campos Obrigatórios", 2000);
+			} else {
+				String insert = "INSERT INTO tb_funcionario" + "(nome, sobrenome,salario,cargo) VALUES" + "(?,?,?,?)";
 
-			PreparedStatement preparedStatement = new ConnectionFactory().getConnection().prepareStatement(insert);
+				PreparedStatement preparedStatement = new ConnectionFactory().getConnection().prepareStatement(insert);
 
-			preparedStatement.setString(1, funcionario.getNome());
-			preparedStatement.setString(2, funcionario.getSobrenome());
-			preparedStatement.setDouble(3, funcionario.getSalario());
-			preparedStatement.setString(4, funcionario.getCargo());
+				preparedStatement.setString(1, funcionario.getNome());
+				preparedStatement.setString(2, funcionario.getSobrenome());
+				preparedStatement.setDouble(3, funcionario.getSalario());
+				preparedStatement.setString(4, funcionario.getCargo());
 
-			preparedStatement.executeUpdate();
-			preparedStatement.close();
-			Toast.show("Novo Funcionario Inserido com Sucesso !", 2000);
+				preparedStatement.executeUpdate();
+				preparedStatement.close();
+				Toast.show("Novo Funcionario Inserido com Sucesso !", 2000);
+			}
 		} catch (Exception e) {
 			MessageBox.showException(e, true);
 		}

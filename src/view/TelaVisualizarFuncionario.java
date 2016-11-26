@@ -72,7 +72,7 @@ public class TelaVisualizarFuncionario extends Window {
 
 		add(sp, CENTER, BOTTOM - 200, PARENTSIZE + 10, PREFERRED);
 
-		add(btnCancelar = new Button("VOLTAR", new Image("imagens/back-icon.png"), RIGHT, 0), RIGHT - 100, SAME,
+		add(btnCancelar = new Button("Voltar", new Image("imagens/back-icon.png"), RIGHT, 0), RIGHT - 100, SAME,
 				PREFERRED + 100, 25, sp);
 		btnCancelar.setBackColor(Color.RED);
 		btnCancelar.setForeColor(Color.WHITE);

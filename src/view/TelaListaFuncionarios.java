@@ -17,7 +17,6 @@ import totalcross.ui.ListBox;
 import totalcross.ui.Spacer;
 import totalcross.ui.Toast;
 import totalcross.ui.Window;
-import totalcross.ui.dialog.MessageBox;
 import totalcross.ui.event.ControlEvent;
 import totalcross.ui.event.Event;
 import totalcross.ui.gfx.Color;
@@ -33,7 +32,7 @@ public class TelaListaFuncionarios extends Window {
 
 	private ListBox listBox;
 	private FuncionarioRepository repository;
-	private Button btnEditar, btnExcluir, btnSair, btnNovo, btnVisualizar;
+	private Button btnEditar, btnExcluir, btnSair, btnVisualizar;
 	private Grid grid;
 
 	public TelaListaFuncionarios() throws ImageException, IOException {
@@ -79,23 +78,23 @@ public class TelaListaFuncionarios extends Window {
 		add(sp, CENTER, BOTTOM - 200, PARENTSIZE + 10, PREFERRED);
 		add(sp2, CENTER, BOTTOM - 400, PARENTSIZE + 10, PREFERRED);
 
-		add(btnExcluir = new Button("EXCLUIR", new Image("imagens/delete-icon.png"), RIGHT, 0), RIGHT, SAME,
-				PREFERRED + 100, 25, sp);
+		add(btnExcluir = new Button("Excluir", new Image("imagens/delete-icon.png"), RIGHT, 0), LEFT - 100, SAME,
+				PREFERRED + 100, 25, sp2);
 		btnExcluir.setBackColor(Color.RED);
 		btnExcluir.setForeColor(Color.WHITE);
 
-		add(btnEditar = new Button("EDITAR", new Image("imagens/edit-icon.png"), RIGHT, 0), CENTER, SAME,
-				PREFERRED + 100, 25, sp);
+		add(btnEditar = new Button("Editar", new Image("imagens/edit-icon.png"), RIGHT, 0), CENTER, SAME,
+				PREFERRED + 100, 25, sp2);
 		btnEditar.setBackColor(Color.YELLOW);
 		btnEditar.setForeColor(Color.BLACK);
 
-		add(btnVisualizar = new Button("VER", new Image("imagens/search-icon.png"), RIGHT, 0), LEFT, SAME,
-				PREFERRED + 100, 25, sp);
+		add(btnVisualizar = new Button("Ver", new Image("imagens/search-icon.png"), RIGHT, 0), RIGHT - 100, SAME,
+				PREFERRED + 100, 25, sp2);
 		btnVisualizar.setBackColor(Color.GREEN);
 		btnVisualizar.setForeColor(Color.BLACK);
 
-		add(btnSair = new Button("VOLTAR", new Image("imagens/back-icon.png"), RIGHT, 0), LEFT, SAME, PREFERRED + 100,
-				25, sp2);
+		add(btnSair = new Button("Voltar", new Image("imagens/back-icon.png"), RIGHT, 0), LEFT, SAME, PREFERRED + 100,
+				25, sp);
 		btnSair.setBackColor(Color.RED);
 		btnSair.setForeColor(Color.WHITE);
 	}
@@ -105,10 +104,7 @@ public class TelaListaFuncionarios extends Window {
 		try {
 			switch (event.type) {
 			case ControlEvent.PRESSED:
-				if (event.target == grid) {
-					@SuppressWarnings(value = "unused")
-					Object element = grid.getSelectedItem();
-				} else if (event.target == btnExcluir) {
+				if (event.target == btnExcluir) {
 					if (grid.getSelectedItem() == null) {
 						Toast.show("Selecione algum Funcionário para Excluir", 2000);
 					} else {
@@ -121,7 +117,7 @@ public class TelaListaFuncionarios extends Window {
 							TelaListaFuncionarios telaListaFuncionarios = new TelaListaFuncionarios();
 							telaListaFuncionarios.popup();
 						} catch (SQLException e) {
-							MessageBox.showException(e, true);
+							// MessageBox.showException(e, true);
 						}
 					}
 				} else if (event.target == btnEditar) {
@@ -134,7 +130,7 @@ public class TelaListaFuncionarios extends Window {
 							telaEditarFuncionario.popup();
 
 						} catch (Exception e) {
-							MessageBox.showException(e, true);
+							// MessageBox.showException(e, true);
 						}
 
 					}
@@ -148,7 +144,7 @@ public class TelaListaFuncionarios extends Window {
 							telaVisualizarFuncionario.popup();
 
 						} catch (Exception e) {
-							MessageBox.showException(e, true);
+							// MessageBox.showException(e, true);
 						}
 
 					}

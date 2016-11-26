@@ -5,6 +5,7 @@ package view;
 
 import model.Funcionario;
 import repository.FuncionarioRepository;
+import totalcross.io.IOException;
 import totalcross.sys.Settings;
 import totalcross.ui.Button;
 import totalcross.ui.Edit;
@@ -16,6 +17,8 @@ import totalcross.ui.dialog.MessageBox;
 import totalcross.ui.event.ControlEvent;
 import totalcross.ui.event.Event;
 import totalcross.ui.gfx.Color;
+import totalcross.ui.image.Image;
+import totalcross.ui.image.ImageException;
 
 /**
  * @author delano.junior
@@ -29,7 +32,7 @@ public class TelaEditarFuncionario extends Window {
 	private FuncionarioRepository repository;
 	private Funcionario funcionario;
 
-	public TelaEditarFuncionario(String id) {
+	public TelaEditarFuncionario(String id) throws ImageException, IOException {
 
 		this.id = id;
 		gradientTitleStartColor = 0;
@@ -70,13 +73,16 @@ public class TelaEditarFuncionario extends Window {
 
 		add(sp, CENTER, BOTTOM - 200, PARENTSIZE + 10, PREFERRED);
 
-		add(btnSalvar = new Button("SALVAR"), LEFT + 100, SAME, PREFERRED + 100, 25, sp);
+		add(btnSalvar = new Button("Salvar", new Image("imagens/add-icon.png"), RIGHT, 0), LEFT + 100, SAME,
+				PREFERRED + 100, 25, sp);
 		btnSalvar.setBackColor(Color.GREEN);
 		btnSalvar.setForeColor(Color.BLACK);
 
-		add(btnLimpar = new Button("LIMPAR"), CENTER, SAME, PREFERRED + 100, 25, sp);
+		add(btnLimpar = new Button("Limpar", new Image("imagens/reset-icon.png"), RIGHT, 0), CENTER, SAME,
+				PREFERRED + 100, 25, sp);
 
-		add(btnCancelar = new Button("VOLTAR"), RIGHT - 100, SAME, PREFERRED + 100, 25, sp);
+		add(btnCancelar = new Button("Voltar", new Image("imagens/back-icon.png"), RIGHT, 0), RIGHT - 100, SAME,
+				PREFERRED + 100, 25, sp);
 		btnCancelar.setBackColor(Color.RED);
 		btnCancelar.setForeColor(Color.WHITE);
 
